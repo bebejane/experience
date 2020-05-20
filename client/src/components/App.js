@@ -10,6 +10,7 @@ import history from '../history'
 
 import { IoIosRefresh } from 'react-icons/io'
 import { BsCheckAll } from 'react-icons/bs'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 import "./App.css";
 
@@ -102,7 +103,7 @@ class App extends Component {
                     this.setState({ articles: [], feedId: null })
                 return res
             })
-            .then(() => this.feeds(true))
+            .then(() => this.feeds())
             .catch((err) => {})
 
     }
@@ -265,6 +266,7 @@ class App extends Component {
         const { articles, feeds, feedId, search, refreshing, loadingFeeds, init, error, pages, page, view } = this.state
         const feed = feeds.filter((f) => f._id === feedId)[0] || {}
         const loadingFeed = feedId !== undefined && feedId === refreshing
+        const fullView = view === 'full'
 
         if (!init)
             return <Loading message={'Starting up...'} loading={true}/>
@@ -297,10 +299,11 @@ class App extends Component {
 
                         <div id={'feed-tools'}>
                             <Button onClick={()=>this.browse(-1)} icon={'-'}/>
-                            <Button onClick={()=>{}} icon={page + '/' + pages} size={11}/>
+
+                            <div className={'button-spacer'}>{page + '/' + pages}</div>
                             <Button onClick={()=>this.browse(1)} icon={'+'}/>
-                            <div class={'button-spacer'}></div>
-                            <Button onClick={()=>this.onToggleView(view)} icon={'V'}/>
+                            <div className={'button-spacer'}></div>
+                            <Button onClick={()=>this.onToggleView(view)} icon={fullView ? <FiChevronUp/> : <FiChevronDown/>}/>
                             <Button onClick={()=>this.toggleAllRead(feed._id)} icon={<BsCheckAll/>}/>
                             <Button onClick={()=>this.refreshFeed(feed._id)} icon={<IoIosRefresh/>}/>
                         </div>

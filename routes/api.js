@@ -36,7 +36,6 @@ router.post('/feed', async (req, res, next)=> {
 
         const rssFeed = await parser.parseURL(rssURL)
         const feed = await insertFeed({url:rssURL, name:rssFeed.title})
-        console.log(rssFeed.items)
         const articles = await insertArticle(feed._id, rssFeed.items)
         res.send(feed)
         console.log('inserted feed', rssURL, articles.length)
@@ -141,7 +140,6 @@ router.get('/feed/:feedId/:id', async (req, res, next)=> {
     const id = req.params.id
     const feedId = req.params.feedId
     const article = await findArticle(id)
-    console.log(article)
     res.send(article)
 
 });

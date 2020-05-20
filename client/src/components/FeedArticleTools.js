@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {AiOutlineArrowRight, AiOutlineCheck} from 'react-icons/ai'
+import {FiChevronDown, FiChevronUp} from 'react-icons/fi'
+
 import Button from './Button'
 import "./FeedArticleTools.css";
 
@@ -9,6 +11,7 @@ class FeedArticleTools extends Component {
         super(props);
         this.state = {
             id:props.id,
+            view:props.view,
             article:props.article
         };
     }
@@ -34,6 +37,9 @@ class FeedArticleTools extends Component {
     onOpen(){
         this.props.onOpen()
     }
+    onToggleView(){
+        this.props.onToggleView(this.state.id)
+    }
     componentDidMount() {
 
     }
@@ -43,11 +49,17 @@ class FeedArticleTools extends Component {
     }
 
     render() {
+        const fullView = this.state.view === 'full'
 
         return (
             <div className={'feed-card-tools'}>
-                <Button onClick={(e)=>this.onToggleRead(e)} icon={<AiOutlineCheck/>}/>
-                <Button onClick={(e)=>this.onOpen(e)} icon={<AiOutlineArrowRight/>}/>
+                <Button onClick={(e)=>this.onToggleView(e)} icon={fullView ? <FiChevronUp/> : <FiChevronDown/>}/>
+                {fullView &&
+                    <div>
+                        <Button onClick={(e)=>this.onToggleRead(e)} icon={<AiOutlineCheck/>}/>
+                        <Button onClick={(e)=>this.onOpen(e)} icon={<AiOutlineArrowRight/>}/>
+                    </div>
+                }
             </div>
         );
     }

@@ -8,10 +8,9 @@ const url = require('url')
 const insertArticle = async (fId, a) =>{
     a = Array.isArray(a) ? a : [a]
     a.forEach((art)=>{
-        console.log(a.content)
         art.feedId = fId
-        art.content = striptags(a.content)
-        art.read = false
+        art.contentSnippet = stripContent(art)
+        //art.read = false
         delete art.categories
 
     })
@@ -23,22 +22,22 @@ const upsertArticle = async (feedId, articles) =>{
 
     articles = Array.isArray(articles) ? articles : [articles]
     let arts = []
+
     for (var i = 0; i < articles.length; i++) {
         articles[i].feedId = feedId
-        articles[i].content = striptags(articles[i].content)
+        articles[i].contentSnippet = stripContent(articles[i])
         delete articles[i].categories
-        delete articles[i]._id
-        arts.push(await Article.findOneAndUpdate({
+        articles[i] = await Article.findOneAndUpdate({
             feedId:feedId,
             guid:articles[i].guid
         }, articles[i], {
             upsert:true,
             setDefaultsOnInsert:true,
             useFindAndModify:false
-        }))
+        })
     }
 
-    return arts.length == 1 ? arts[0] : arts
+    return articles.length == 1 ? articles[0] : articles
 }
 const updateArticle = async (feedId, articles) =>{
     articles = Array.isArray(articles) ? articles : [articles]
@@ -61,10 +60,9 @@ const listArticles = async (query, opt = {skip:0, limit:10}) =>{
 const listHomeArticles = async (opt = {skip:0, limit:0}) =>{
     const articles = await Article.find({},{},opt).sort({pubDate:'desc'}).lean()
     const feeds = await Feed.find({});
-    console.log(feeds)
+    //console.log(feeds)
     articles.forEach((a)=>{
         a.feed = feeds.filter((f)=> f._id == a.feedId)[0]
-        console.log(a.feed)
     })
 
     return articles
@@ -77,5 +75,14 @@ const findArticle = async (id) =>{
 const removeArticle = async (id) =>{
     const query = id ? { _id:id} : {}
     await Article.deleteMany(query)
+}
+const stripContent = (article) =>{
+
+    const sentances = striptags(article.content || article.contentSnippet).split('.')
+
+    if(sentances.length > 0)
+        return sentances[0] + '.'
+    else
+        return sentances.substring(0,100)
 }
 module.exports = {listHomeArticles, insertArticle, updateArticle, upsertArticle, listArticles, removeArticle, findArticle}

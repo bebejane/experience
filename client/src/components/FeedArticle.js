@@ -11,7 +11,8 @@ class FeedArticle extends Component {
             feed: props.feed,
             article: props.article,
             view:props.view,
-            refreshing: props.refreshing
+            refreshing: props.refreshing,
+            fullView: props.view === 'full'
         };
     }
     onClick(url) {
@@ -24,6 +25,10 @@ class FeedArticle extends Component {
         this.props.onToggleRead(this.state.article._id, read)
         this.setState({ article: { ...this.state.article, read: read } })
     }
+    onToggleView() {
+        console.log('toggle')
+        this.setState({ fullView: !this.state.fullView})
+    }
     deleteFeed(id) {
         this.props.onRemove()
     }
@@ -35,7 +40,9 @@ class FeedArticle extends Component {
     }
     contentSnippet(article) {
 
+        return article.content
         let snippet = article.contentSnippet || article.content || '';
+
         if(!snippet)
             return ''
 
@@ -49,12 +56,14 @@ class FeedArticle extends Component {
         return snippet
     }
     static getDerivedStateFromProps(nextProps, prevState) {
-        return nextProps
+        if(nextProps.view !== prevState.view)
+            return {...nextProps, fullView:nextProps.view === 'full'} 
+        else
+            return nextProps
     }
 
     render() {
-        const { article, selected, view ,feed} = this.state
-        const fullView = view === 'full'
+        const { article, selected, view ,feed, fullView} = this.state
 
         return (
             <div className={'feed-card' + (selected === article._id ? ' feed-card-selected' : '')}>
@@ -62,23 +71,21 @@ class FeedArticle extends Component {
                     <div className={'feed-card-title'}>
                         <div className={'feed-card-date'}>{article.time} - {feed}</div>
                         {article.title}
-                        {fullView &&
-                            <div className={'feed-card-content'}>
-                                {this.contentSnippet(article)}
+                            <div
+                                className={'feed-card-content'}
+                                dangerouslySetInnerHTML={{ __html: fullView ? article.content : article.contentSnippet}}>
                             </div>
-                        }
                     </div>
                 </div>
                 <div className={'feed-card-right'}>
-                {fullView &&
                     <FeedArticleTools
                         article={article}
-                        onToggleRead={(read)=>this.onToggleRead()} 
+                        view={fullView ? 'full' : 'mini'}
+                        onToggleRead={(read)=>this.onToggleRead()}
+                        onToggleView={()=>this.onToggleView()}
                         onOpen={()=>this.onClick(article.link)}
                     />
-                }
                 </div>
-
             </div>
         );
     }
