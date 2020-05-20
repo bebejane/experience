@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+<form action="/blog" method="POST">
+    <input type="text" name="title" id="title"><br>
+    <input type="text" name="author" id="author"><br>
+    <textarea name="body" id="body"></textarea><br>
+    <button type="submit">Add post</button>
+<ul>
+{{#each posts}}
+
+
+<li> <a href="/blog/delete/{{_id}}">X</a> - {{_id}} - <a href="/blog/post/{{_id}}">{{title}}</a> - {{author}}</li>
+</form>
+{{/each}}
+</ul>
