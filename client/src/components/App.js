@@ -39,7 +39,7 @@ class App extends Component {
         console.log(opt.method.toUpperCase(), path, data)
         return axios({
             method: opt.method || 'get',
-            url: "http://localhost:3001/api" + path,
+            url: "/api" + path,
             data: data
         }).then((res) => {
             if(!res) return
