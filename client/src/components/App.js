@@ -14,6 +14,9 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 import "./App.css";
 
+const DEV = window.location.includes('localhost')
+
+
 class App extends Component {
 
     constructor(props) {
@@ -36,10 +39,11 @@ class App extends Component {
     }
 
     api(path, data = {}, opt = { method: 'get' }) {
+        console.log(process.env.NODE_ENV)
         console.log(opt.method.toUpperCase(), path, data)
         return axios({
             method: opt.method || 'get',
-            url: "/api" + path,
+            url: (DEV ? 'http://localhost:3000' : "/") + path,
             data: data
         }).then((res) => {
             if(!res) return
