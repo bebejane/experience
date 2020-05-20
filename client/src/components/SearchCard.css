@@ -1,0 +1,51 @@
+.search-card{
+    display: flex;
+    flex: 1 1 auto;
+    min-height:60px;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    align-items: center;
+    justify-content: center;
+    padding-left:5px;
+    cursor: pointer;
+}
+.search-card:hover{
+    background-color: rgba(0,0,0,0.02);
+}
+.search-card-selected{
+ background-color: rgba(0,0,0,0.06) !important;
+}
+.search-card-title{
+    flex: 1 1 auto;
+    font-size: 14px;
+    color:#000;
+    text-overflow: ellipsis;
+}
+.search-card-link{
+    font-size: 12px;
+    color:gray;
+    text-overflow: ellipsis;
+}
+.search-card-tools{
+    display: flex;
+    flex: 0 1;
+    align-self: flex-end;
+    flex-direction: row;
+    color:rgba(0,0,0,0.2);
+}
+.search-card-tool{
+    display: flex;
+    flex: 0 0 30px;
+    min-width: 30px;
+    font-size: 20px !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.search-card-tool:hover{
+    color:rgba(0,0,0,0.4);
+}
+.search-results{
+    position: relative;
+}

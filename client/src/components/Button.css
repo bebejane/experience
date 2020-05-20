@@ -1,0 +1,26 @@
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width:30px;
+    max-width:30px;
+    min-height:30px;
+    max-height:30px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.04);
+    margin:2px;
+    cursor: pointer !important;
+    user-select: none;
+}
+.button:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+.button[disabled]{
+    opacity:0.3;
+}
+.button-spacer{
+    min-width:30px;
+    max-width:30px;
+    min-height:30px;
+    max-height:30px;
+}

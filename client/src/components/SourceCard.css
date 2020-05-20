@@ -1,0 +1,62 @@
+.source-card{
+    display: flex;
+    flex: 1 1 auto;
+    min-height:30px;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    align-items: center;
+
+    padding-left:5px;
+}
+.source-card:hover{
+    background-color: rgba(173, 214, 169, 0.1)
+}
+.source-card-selected{
+ background-color: rgba(173, 214, 169, 0.2) !important;
+}
+.source-card-title{
+    flex: 1 1 auto;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color:rgba(0, 0, 0, 0.6);
+    border:0px;
+    cursor: pointer;
+    background-color: transparent;
+}
+.source-card-tools{
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    color:rgba(0,0,0,0.2);
+}
+.source-card-tool{
+    display: flex;
+    flex: 0 0 30px;
+    min-height:30px;
+    min-width: 30px;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.source-card-tool:hover{
+    color:rgba(0,0,0,0.4);
+}
+.source-card-unread{
+    display: flex;
+    flex: 0 0 25px;
+    min-height:20px;
+    min-width: 20px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.03);
+    color: rgba(0,0,0,0.4);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right:5px;
+}

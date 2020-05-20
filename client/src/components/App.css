@@ -1,0 +1,153 @@
+body,
+html {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+
+}
+
+a:link,
+a:visited {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+
+}
+
+a:link:active,
+a:visited:active {}
+
+#root {
+    height: 100%;
+    width: 100%;
+
+}
+
+.App {
+
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 100%;
+    padding: 0px;
+
+}
+
+#left {
+    position: relative;
+    flex: 0 0 300px;
+    font-size: 10px;
+    max-width: 300px;
+
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#right {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 0px;
+    padding-top: 0px;
+    box-sizing: border-box;
+
+}
+
+#feed {
+    overflow-y: scroll;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#feed-header {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    min-height:60px;
+    max-height:60px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#feed-title {
+    flex: 1 1 auto;
+    font-size: 26px;
+    padding-left: 10px;
+}
+
+#feed-tools {
+    display: flex;
+    flex: 0 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 10px;
+}
+
+.feed-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin: 5px;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.feed-tool:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+}
+.feed-pages{
+    font-size: 11px;
+    min-width: 30px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.icon-spin {
+    -webkit-animation: icon-spin 1s infinite linear;
+    animation: icon-spin 1s infinite linear;
+}
+.refresh{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width:100%;
+}
+@-webkit-keyframes icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
